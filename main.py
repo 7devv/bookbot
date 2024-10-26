@@ -1,14 +1,18 @@
-def main():
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-    return file_contents
+def get_file_text(book_path):
+    with open(book_path) as f:
+        return f.read()
 
+
+def word_count(text):
+    words = text.split()
+    count = len(words)
+    print(f"Word count: {count}")
+    return words
     
-def word_count(file_contents):
-    count = 0
-    words = file_contents.split()
-    for word in words:
-        count += 1
-    print(count)
 
-word_count(main())
+def main():
+    book_path = "books/frankenstein.txt"
+    text = get_file_text(book_path)
+    word_count(text)
+
+main()
