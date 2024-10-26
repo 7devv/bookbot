@@ -6,8 +6,7 @@ def get_file_text(book_path):
 def word_count(text):
     words = text.split()
     count = len(words)
-    print(f"Word count: {count}")
-    return words
+    return words, count
     
 
 def letter_count(text):
@@ -21,17 +20,29 @@ def letter_count(text):
                 else:
                     letter_count[char] = 1
     
-    print(letter_count)
+    return letter_count
     
-            
+    
+def create_list(letter_count):
+    letters = []
+    
+    for key in letter_count:
+        letters.append({"char": key, "count": letter_count[key]})
+    return letters
         
+        
+def sort_on(dict):
+    return dict["count"]
 
 
 def main():
     book_path = "books/frankenstein.txt"
     text = get_file_text(book_path)
     lower_words = text.lower()
-    letter_count(lower_words)
+    counted = letter_count(lower_words)
     word_count(text)
+    letter_list = create_list(counted)
+    letter_list.sort(reverse=True, key=sort_on)
+    
 
 main()
