@@ -3,7 +3,7 @@ def get_file_text(book_path):
         return f.read()
 
 
-def word_count(text):
+def count_words(text):
     words = text.split()
     count = len(words)
     return words, count
@@ -35,14 +35,25 @@ def sort_on(dict):
     return dict["count"]
 
 
+def report(book_path, letter_list, word_count):
+    print(f"--- START OF THE REPORT IN {book_path} ---\n"
+    f"The total amount of words was {word_count}")
+    
+    for letter in letter_list:
+        print(f"The {letter['char']} character appeared {letter['count']} times")
+    
+    
+    print("--- END OF THE REPORT ---")
+
+
 def main():
     book_path = "books/frankenstein.txt"
     text = get_file_text(book_path)
     lower_words = text.lower()
     counted = letter_count(lower_words)
-    word_count(text)
+    words, word_count = count_words(text)
     letter_list = create_list(counted)
     letter_list.sort(reverse=True, key=sort_on)
-    
+    report(book_path, letter_list, word_count)
 
 main()
